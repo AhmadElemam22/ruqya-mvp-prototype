@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" dir="{% if request.locale.iso_code == 'ar' %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="utf-8">
+  {%- if request.path == '' or request.path == '/' -%}
+    <script>window.location.replace('/en-eg' + window.location.search + window.location.hash);</script>
+  {%- endif -%}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
+  {% if page_description %}<meta name="description" content="{{ page_description }}">{% endif %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="icon" type="image/png" href="{{ 'favicon.png' | asset_url }}">
+  <link rel="apple-touch-icon" href="{{ 'apple-touch-icon.png' | asset_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&family=Amiri:wght@400;700&family=Cairo:wght@400;500;600&display=swap">
+  {{ content_for_header }}
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <style>
+    :root {
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --color-background: {{ settings.color_background | default: '#FAF8F5' }};
+      --color-foreground: {{ settings.color_foreground | default: '#1A1A1A' }};
+      --color-surface: {{ settings.color_surface | default: '#F3EFE8' }};
+      --color-primary: {{ settings.color_primary | default: '#6B7F6E' }};
+      --color-primary-foreground: {{ settings.color_primary_text | default: '#FAFAFA' }};
+      --color-accent: {{ settings.color_accent | default: '#C4A882' }};
+      --color-border: {{ settings.color_border | default: '#E8E2D9' }};
+      --color-muted: {{ settings.color_muted | default: '#6B6560' }};
+      --color-whatsapp: {{ settings.color_whatsapp | default: '#25D366' }};
+      --font-serif: "Cormorant Garamond", Georgia, serif;
+      --font-sans: "DM Sans", system-ui, sans-serif;
+      --font-arabic: "Cairo", system-ui, sans-serif;
+      --font-arabic-display: "Amiri", Georgia, serif;
+    }
+  </style>
+  {%- comment -%} Google Analytics 4 {%- endcomment -%}
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VFLWF0QR6B"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VFLWF0QR6B');
+  </script>
+</head>
+<body>
+  {% section 'header' %}
+  <main id="main">
+    {{ content_for_layout }}
+  </main>
+  {% section 'footer' %}
+
+  {% section 'cart-drawer' %}
+  {% render 'search-modal' %}
+  {% render 'quickview-modal' %}
+  {% render 'whatsapp-fab' %}
+
+  <script>window.routes = { search_url: {{ routes.search_url | json }} };</script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+</body>
+</html>

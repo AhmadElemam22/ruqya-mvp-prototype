@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {}
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {}
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {}
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {}
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

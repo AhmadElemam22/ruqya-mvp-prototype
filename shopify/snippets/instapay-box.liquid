@@ -1,0 +1,46 @@
+{%- capture wa_message -%}
+{{ 'general.cart.instapay_wa_intro' | t }}
+
+{% for item in cart.items %}- {{ item.product.title }}{% unless item.variant.title == 'Default Title' %} ({{ item.variant.title }}){% endunless %} x{{ item.quantity }} — {{ item.final_line_price | money }}
+{% endfor %}
+{{ 'general.cart.subtotal' | t }}: {{ cart.total_price | money }}
+{{ 'general.cart.instapay_number_label' | t }}: {{ settings.instapay_number }}
+{{ 'general.cart.instapay_name_label' | t }}: {{ settings.instapay_name }}
+{%- endcapture -%}
+
+<div class="instapay-box{% if compact %} instapay-box--compact{% endif %}">
+  <div class="instapay-box__title">{{ 'general.cart.instapay_title' | t }}</div>
+  {% unless compact %}
+    <p class="instapay-box__copy">{{ 'general.cart.instapay_copy' | t }}</p>
+    <ol class="instapay-box__steps">
+      <li>{{ 'general.cart.instapay_step_1' | t }}</li>
+      <li>{{ 'general.cart.instapay_step_2' | t }}</li>
+    </ol>
+  {% endunless %}
+
+  <div class="instapay-box__row">
+    <div>
+      <div class="instapay-box__label">{{ 'general.cart.instapay_number_label' | t }}</div>
+      <div class="instapay-box__value" dir="ltr">{{ settings.instapay_number }}</div>
+    </div>
+    <button type="button" class="instapay-box__copy-btn" data-copy="{{ settings.instapay_number | escape }}" data-copied-label="{{ 'general.cart.instapay_copied' | t | escape }}">{{ 'general.cart.instapay_copy_number' | t }}</button>
+  </div>
+
+  <div class="instapay-box__row">
+    <div>
+      <div class="instapay-box__label">{{ 'general.cart.instapay_name_label' | t }}</div>
+      <div class="instapay-box__value">{{ settings.instapay_name }}</div>
+    </div>
+  </div>
+
+  <div class="instapay-box__row">
+    <div>
+      <div class="instapay-box__label">{{ 'general.cart.instapay_amount_label' | t }}</div>
+      <div class="instapay-box__value">{{ cart.total_price | money }}</div>
+    </div>
+  </div>
+
+  <a href="https://wa.me/{{ settings.whatsapp_number }}?text={{ wa_message | strip | url_encode }}" target="_blank" rel="noreferrer" class="btn btn-primary instapay-box__wa">
+    {% render 'icon-whatsapp' %} {{ 'general.cart.instapay_confirm_whatsapp' | t }}
+  </a>
+</div>

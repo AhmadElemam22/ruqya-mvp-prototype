@@ -1,0 +1,68 @@
+<footer class="site-footer">
+  <div class="container-r" style="padding-block:4rem;">
+    <div style="max-width:32rem;margin-inline:auto;text-align:center;">
+      <h3 style="font-size:1.875rem;">{{ 'general.footer.stay_in_touch' | t }}</h3>
+      <p class="text-muted text-sm" style="margin-top:.5rem;">{{ 'general.footer.newsletter_copy' | t }}</p>
+      {% form 'customer', id: 'newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-form">
+          <input type="email" name="contact[email]" required placeholder="your@email.com">
+          <button type="submit" class="btn btn-primary">{{ 'general.subscribe' | t }}</button>
+        </div>
+        {% if form.posted_successfully? %}<p class="text-sm" style="margin-top:.5rem;color:var(--color-primary);">{{ 'general.footer.subscribed' | t }}</p>{% endif %}
+      {% endform %}
+    </div>
+
+    <div class="footer-cols">
+      <div>
+        <h4>{{ 'general.nav.shop_by_material' | t }}</h4>
+        <ul>
+          {% for collection in collections %}
+            {% if collection.metafields.custom.is_material %}
+              <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h4>{{ 'general.nav.brands' | t }}</h4>
+        <ul>
+          {% for v in shop.vendors %}{% capture vh %}{% render 'vendor-handle', vendor: v %}{% endcapture %}{% assign vh = vh | strip %}<li><a href="{% if collections[vh].id %}{{ collections[vh].url }}{% else %}{{ v | url_for_vendor }}{% endif %}">{{ v }}</a></li>{% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h4>{{ 'general.footer.help' | t }}</h4>
+        <ul>
+          <li><a href="{{ pages.faq.url | default: '/pages/faq' }}">{{ 'general.nav.faq' | t }}</a></li>
+          <li><a href="{{ pages.contact.url | default: '/pages/contact' }}">{{ 'general.nav.contact' | t }}</a></li>
+          <li><a href="{{ shop.policies.shipping_policy.url }}">{{ 'general.footer.shipping' | t }}</a></li>
+          <li><a href="{{ shop.policies.refund_policy.url }}">{{ 'general.footer.returns' | t }}</a></li>
+          <li><a href="{{ shop.policies.privacy_policy.url }}">{{ 'general.footer.privacy' | t }}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>{{ 'general.footer.connect' | t }}</h4>
+        <div class="footer-social">
+          {% if settings.instagram_url != blank %}<a href="{{ settings.instagram_url }}" aria-label="Instagram">{% render 'icon-instagram' %}</a>{% endif %}
+          {% if settings.facebook_url != blank %}<a href="{{ settings.facebook_url }}" aria-label="Facebook">{% render 'icon-facebook' %}</a>{% endif %}
+          <a href="https://wa.me/{{ settings.whatsapp_number }}" aria-label="WhatsApp">{% render 'icon-whatsapp' %}</a>
+          {% if settings.whatsapp_number_2 != blank %}
+            <a href="https://wa.me/{{ settings.whatsapp_number_2 }}" aria-label="WhatsApp 2">{% render 'icon-whatsapp' %}</a>
+          {% endif %}
+        </div>
+        <p class="text-sm text-muted" style="margin-top:1rem;">{{ 'general.footer.bilingual' | t }}</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© {{ shop.name | upcase }} — {{ 'general.footer.rights' | t }}</div>
+      <div style="display:flex;gap:.75rem;">
+        <span class="pay-badge">{{ 'general.footer.cod' | t }}</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{ "name": "Footer", "settings": [] }
+{% endschema %}

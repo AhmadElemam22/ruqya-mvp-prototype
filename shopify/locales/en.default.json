@@ -1,0 +1,230 @@
+{
+  "general": {
+    "404": "This page doesn't exist.",
+    "go_home": "Go home",
+    "add_to_cart": "Add to cart",
+    "added_to_cart": "Added to cart",
+    "apply": "Apply",
+    "buy_via_whatsapp": "Buy via WhatsApp",
+    "buy_item": "Buy item",
+    "cart_label": "Cart",
+    "clear_filters": "Clear filters",
+    "color": "Color",
+    "coming_soon": "Coming soon",
+    "filter": "Filter",
+    "language": "Language",
+    "no_products_match": "No products match your filters",
+    "products": "products",
+    "search": "Search",
+    "search_placeholder": "Search hijabs, brands, materials...",
+    "select_options": "Select options",
+    "shop": "Shop",
+    "subscribe": "Subscribe",
+    "suggested": "Suggested",
+    "view_all": "View all",
+    "view_full_details": "View full details",
+    "cart": {
+      "add_more_for_free_shipping": "Add {{ amount }} more for free shipping",
+      "checkout": "Checkout",
+      "continue_shopping": "Continue shopping",
+      "instapay_title": "Pay with InstaPay",
+      "instapay_copy": "Open InstaPay on your phone and transfer the order total to this account. Then send the transfer screenshot on WhatsApp to confirm your order.",
+      "instapay_step_1": "Transfer the amount via InstaPay",
+      "instapay_step_2": "Send the screenshot on WhatsApp",
+      "instapay_number_label": "InstaPay number",
+      "instapay_name_label": "Account name",
+      "instapay_amount_label": "Amount to transfer",
+      "instapay_copy_number": "Copy",
+      "instapay_copied": "Copied",
+      "instapay_confirm_whatsapp": "Confirm on WhatsApp",
+      "instapay_wa_intro": "Hello, I transferred the order via InstaPay.",
+      "discover_collection": "Discover our collection",
+      "empty": "Your cart is empty",
+      "empty_copy": "Discover premium Turkish hijabs woven with quiet exclusivity.",
+      "free_shipping_unlocked": "Free shipping unlocked ✓",
+      "order_summary": "Order summary",
+      "subtotal": "Subtotal",
+      "title": "Cart",
+      "view_cart": "View cart",
+      "your_cart": "Your cart"
+    },
+    "contact": {
+      "chat_whatsapp": "Chat on WhatsApp",
+      "whatsapp_primary": "WhatsApp",
+      "whatsapp_secondary": "Second WhatsApp",
+      "email": "Email",
+      "full_name": "Full name",
+      "get_in_touch": "Get in touch",
+      "hours_copy": "Sunday – Thursday, 10 AM – 6 PM (Cairo time)",
+      "hours_title": "Business hours",
+      "intro": "Whether you have a question about an order, a product, or wholesale — we'd love to hear from you.",
+      "love_to_hear": "We'd love to hear from you",
+      "message": "Message",
+      "phone": "Phone number",
+      "send": "Send message",
+      "subject": "Subject",
+      "subject_general": "General inquiry",
+      "subject_order": "Order question",
+      "subject_return": "Return request",
+      "subject_wholesale": "Wholesale",
+      "thank_you": "Thank you! We'll reply within 24 hours."
+    },
+    "faq": {
+      "chat_with_us": "Chat with us on WhatsApp",
+      "search_placeholder": "Search questions...",
+      "still_questions": "Still have questions?"
+    },
+    "footer": {
+      "bilingual": "We reply in Arabic and English 🇪🇬",
+      "connect": "Connect",
+      "help": "Help",
+      "newsletter_copy": "Be the first to know about new arrivals and exclusive offers.",
+      "privacy": "Privacy Policy",
+      "returns": "Returns & Exchanges",
+      "rights": "all rights reserved",
+      "shipping": "Shipping & Delivery",
+      "stay_in_touch": "Stay in touch",
+      "subscribed": "Thanks for subscribing!",
+      "cod": "Cash on delivery"
+    },
+    "nav": {
+      "accessories": "Accessories",
+      "all_materials": "All materials",
+      "black_friday": "White Friday",
+      "brands": "Brands",
+      "contact": "Contact",
+      "faq": "FAQ",
+      "home": "Home",
+      "shop_by_material": "Shop by Material"
+    },
+    "pdp": {
+      "brand": "Brand",
+      "brand_desc": "{{ vendor }} is recognized for premium Turkish craftsmanship and woven design heritage.",
+      "care": "Care: Hand wash cold, air dry, iron low.",
+      "description": "Description",
+      "dimensions": "Dimensions",
+      "premium_desc": "Premium {{ material }} hijab featuring an artistic woven pattern.",
+      "ship_1": "Egypt delivery: 2–5 business days",
+      "ship_2": "Cairo & Giza: same-week delivery available",
+      "ship_3": "Free shipping on orders over 2,000 EGP",
+      "ship_4": "Returns within 14 days (unworn, tags attached)",
+      "shipping_returns": "Shipping & Returns",
+      "shop_all": "Shop all {{ vendor }}",
+      "you_may_also_like": "You may also like"
+    },
+    "sort": {
+      "featured": "Featured",
+      "newest": "Newest",
+      "price_asc": "Price: Low to High",
+      "price_desc": "Price: High to Low"
+    },
+    "trust": {
+      "authentic": "Authentic Turkish brand",
+      "easy_returns": "Easy returns",
+      "free_shipping": "Free shipping over 2,000 EGP"
+    },
+    "announcement": "White Friday Offer · Free Shipping 🎉",
+    "rewards": {
+      "msg_0": "Add your first piece to unlock free shipping 🎁",
+      "msg_1": "Free shipping unlocked! Add 1 more piece to get 10% off",
+      "msg_2": "10% off unlocked! Add 1 more piece to get 20% off",
+      "msg_3": "You unlocked the best deal: free shipping + 20% off 🎉",
+      "step_1": "Free shipping",
+      "step_2": "10% off",
+      "step_3": "20% off"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Turkish luxury hijabs",
+      "subheading": "Gentle on the skin with lasting comfort. Designs woven into the fabric — never printed or replicated.",
+      "primary": "Shop now",
+      "secondary": "Explore materials"
+    },
+    "trust": {
+      "item_1": "Free shipping over 2,000 EGP",
+      "item_2": "Authentic Turkish brands",
+      "item_3": "Cash on delivery",
+      "item_4": "WhatsApp support"
+    },
+    "materials": {
+      "eyebrow": "Our hijab categories",
+      "heading": "Shop by material",
+      "subheading": "Discover premium fabrics woven with quiet exclusivity."
+    },
+    "featured": {
+      "heading": "Featured hijabs",
+      "subheading": "Curated pieces from our latest collection."
+    },
+    "story": {
+      "eyebrow": "Why RUQYA",
+      "heading": "First touch tells the difference",
+      "subheading": "RUQYA is created for women who choose real value and quiet exclusivity.",
+      "feature_1": {
+        "title": "Advanced Soft-Touch Fiber",
+        "description": "Gentle on the skin with lasting comfort"
+      },
+      "feature_2": {
+        "title": "Original Turkish Brand",
+        "description": "Authentic quality you can trust"
+      },
+      "feature_3": {
+        "title": "Woven, never printed",
+        "description": "Designs woven into the fabric"
+      },
+      "feature_4": {
+        "title": "Natural breathability",
+        "description": "Lasting stability and softness"
+      }
+    },
+    "brands": {
+      "heading": "Our brands",
+      "subheading": "Authentic Turkish craftsmanship"
+    }
+  },
+  "black_friday": {
+    "eyebrow": "Limited time",
+    "title": "White Friday",
+    "subheading": "Every piece in the store, with rewards that grow as you add more.",
+    "offer_1": "Free shipping on every order",
+    "offer_2": "10% off 2 pieces",
+    "offer_3": "20% off 3+ pieces"
+  },
+  "brands": {
+    "page": {
+      "heading": "Our brands",
+      "subheading": "RUQYA partners with authentic Turkish brands known for woven craftsmanship and premium natural fibers."
+    }
+  },
+  "faq": {
+    "page": {
+      "heading": "Frequently asked questions",
+      "subheading": "Everything you need to know about RUQYA hijabs, orders, and shipping."
+    },
+    "faq_1": {
+      "category": "Orders & Shipping",
+      "question": "How long does delivery take in Egypt?",
+      "answer": "2–5 business days nationwide. Cairo and Giza often receive same-week delivery."
+    },
+    "faq_2": {
+      "category": "Orders & Shipping",
+      "question": "How much is shipping?",
+      "answer": "Shipping is free on every order inside Egypt. Add 2 pieces to get 10% off, or 3 pieces or more to get 20% off."
+    },
+    "faq_3": {
+      "category": "Products & Materials",
+      "question": "Are RUQYA designs printed or woven?",
+      "answer": "All designs are woven directly into the fabric — never printed or replicated."
+    },
+    "faq_4": {
+      "category": "Returns & Exchanges",
+      "question": "What is your return policy?",
+      "answer": "Returns accepted within 14 days if unworn with tags attached."
+    },
+    "faq_5": {
+      "category": "Payments",
+      "question": "What payment methods do you accept?",
+      "answer": "Cash on delivery. Pay the courier in cash or via InstaPay when your order arrives."
+    }
+  }
+}

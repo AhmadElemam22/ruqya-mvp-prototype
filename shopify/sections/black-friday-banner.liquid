@@ -1,0 +1,22 @@
+<section class="bf-banner"{% if section.settings.image != blank %} style="background-image:linear-gradient(rgba(10,10,10,.7),rgba(10,10,10,.7)),url('{{ section.settings.image | image_url: width: 2000 }}');"{% endif %}>
+  <div class="container-r bf-banner__inner">
+    <p class="bf-banner__eyebrow">{{ 'black_friday.eyebrow' | t }}</p>
+    <h2 class="bf-banner__title">{{ 'black_friday.title' | t }}</h2>
+    <p class="bf-banner__copy">{{ 'black_friday.subheading' | t }}</p>
+    <ul class="bf-banner__offers">
+      <li>{% render 'icon-truck' %} {{ 'black_friday.offer_1' | t }}</li>
+      <li>{{ 'black_friday.offer_2' | t }}</li>
+      <li>{{ 'black_friday.offer_3' | t }}</li>
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Black Friday banner",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image (optional)" }
+  ],
+  "presets": [{ "name": "Black Friday banner" }]
+}
+{% endschema %}

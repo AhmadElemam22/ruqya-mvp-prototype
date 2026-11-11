@@ -1,0 +1,163 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "RUQYA"
+      }
+    },
+    "trust-bar": {
+      "type": "trust-bar",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "disabled": true,
+          "settings": {}
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {}
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {}
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "settings": {}
+    },
+    "materials": {
+      "type": "materials-grid",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {}
+    },
+    "brand-story": {
+      "type": "brand-story",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {}
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {}
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {}
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
+      "settings": {}
+    },
+    "brands": {
+      "type": "brands-teaser",
+      "blocks": {
+        "brand_1": {
+          "type": "brand",
+          "settings": {
+            "name": "Levidor",
+            "collection_handle": "levidor",
+            "count": 8
+          }
+        },
+        "brand_2": {
+          "type": "brand",
+          "settings": {
+            "name": "KARACA",
+            "collection_handle": "karaca",
+            "count": 18
+          }
+        },
+        "brand_3": {
+          "type": "brand",
+          "settings": {
+            "name": "Keten",
+            "collection_handle": "keten",
+            "count": 18
+          }
+        },
+        "brand_4": {
+          "type": "brand",
+          "settings": {
+            "name": "Aker",
+            "collection_handle": "aker",
+            "count": 3
+          }
+        },
+        "brand_5": {
+          "type": "brand",
+          "settings": {
+            "name": "Valentino Orlandi",
+            "collection_handle": "valentino-orlandi",
+            "count": 8
+          }
+        },
+        "brand_6": {
+          "type": "brand",
+          "settings": {
+            "name": "Pierre Cardin",
+            "collection_handle": "pierre-cardin",
+            "count": 1
+          }
+        },
+        "brand_7": {
+          "type": "brand",
+          "settings": {
+            "name": "19V69 ITALIA",
+            "collection_handle": "19v69-italia",
+            "count": 2
+          }
+        },
+        "brand_8": {
+          "type": "brand",
+          "settings": {
+            "name": "modakashmir",
+            "collection_handle": "modakashmir",
+            "count": 1
+          }
+        }
+      },
+      "block_order": [
+        "brand_1",
+        "brand_2",
+        "brand_3",
+        "brand_4",
+        "brand_5",
+        "brand_6",
+        "brand_7",
+        "brand_8"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "trust-bar",
+    "materials",
+    "featured",
+    "brand-story",
+    "brands"
+  ]
+}

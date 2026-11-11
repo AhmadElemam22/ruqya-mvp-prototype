@@ -1,0 +1,119 @@
+{%- if section.settings.show_announcement -%}
+  <div class="announcement">
+    <div class="announcement__track">
+      {%- for group in (1..2) -%}
+        <div class="announcement__group"{% if group == 2 %} aria-hidden="true"{% endif %}>
+          {%- for item in (1..4) -%}<span>{{ 'general.announcement' | t }}</span>{%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+<header class="site-header">
+  <div class="container-r site-header__inner">
+    <button class="mobile-menu-btn icon-btn" aria-label="Menu" data-open-drawer="mobile-nav-drawer">
+      {% render 'icon-menu' %}
+    </button>
+
+    <a href="{{ routes.root_url }}" class="site-header__logo">
+      <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" class="site-header__logo-img">
+    </a>
+
+    <nav class="site-nav">
+      <a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a>
+      <a href="{{ routes.collections_url }}/white-friday" class="site-nav__deal">{{ 'general.nav.black_friday' | t }}</a>
+      <div class="mega-menu-wrap">
+        <button type="button">{{ 'general.nav.shop_by_material' | t }} {% render 'icon-chevron-down' %}</button>
+        <div class="mega-menu">
+          <div class="mega-menu__inner">
+            <div class="mega-menu__links">
+              {% for collection in collections %}
+                {% if collection.metafields.custom.is_material %}
+                  <a href="{{ collection.url }}">{{ collection.title }}</a>
+                {% endif %}
+              {% endfor %}
+              {% comment %} Fallback: list all collections if material metafield not set up yet {% endcomment %}
+              {% unless collections.size > 0 %}{% endunless %}
+            </div>
+            <a href="{{ section.settings.promo_link | default: routes.all_products_collection_url }}" class="mega-menu__promo">
+              {% if section.settings.promo_image != blank %}
+                {{ section.settings.promo_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: section.settings.promo_image.alt }}
+              {% elsif collections.first.image %}
+                {{ collections.first.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}
+              {% endif %}
+              <div class="mega-menu__promo-text">
+                <div class="text-xs">{{ 'general.shop' | t }}</div>
+                <div style="font-family:var(--font-serif); font-size:1.25rem;">{{ 'general.nav.all_materials' | t }}</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a href="{{ pages.brands.url | default: '/pages/brands' }}">{{ 'general.nav.brands' | t }}</a>
+      <span style="display:flex;align-items:center;gap:.4rem;color:var(--color-muted);cursor:default;">
+        {{ 'general.nav.accessories' | t }}
+        <span class="coming-soon-pill">{% render 'icon-heart' %} {{ 'general.coming_soon' | t }}</span>
+      </span>
+      <a href="{{ pages.faq.url | default: '/pages/faq' }}">{{ 'general.nav.faq' | t }}</a>
+      <a href="{{ pages.contact.url | default: '/pages/contact' }}">{{ 'general.nav.contact' | t }}</a>
+    </nav>
+
+    <div class="site-header__icons">
+      {% form 'localization', id: 'lang-form' %}
+        <select name="locale_code" onchange="this.form.submit()" aria-label="{{ 'general.language' | t }}" style="border:1px solid var(--color-border);border-radius:4px;padding:.25rem .5rem;background:var(--color-background);">
+          {% for language in localization.available_languages %}
+            <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
+              {{ language.endonym_name | capitalize }}
+            </option>
+          {% endfor %}
+        </select>
+      {% endform %}
+      <button class="icon-btn" aria-label="{{ 'general.search' | t }}" data-open-drawer="search-overlay">{% render 'icon-search' %}</button>
+      <button class="icon-btn" aria-label="{{ 'general.cart_label' | t }}" data-open-drawer="cart-drawer">
+        {% render 'icon-bag' %}
+        {% if cart.item_count > 0 %}<span class="cart-count">{{ cart.item_count }}</span>{% endif %}
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-overlay" id="mobile-nav-drawer">
+  <div class="drawer-overlay__bg"></div>
+  <div class="drawer-panel">
+    <div class="drawer-panel__head">
+      <span class="site-header__logo">
+        <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" class="site-header__logo-img" style="height:1.75rem;">
+      </span>
+      <button data-close-drawer="mobile-nav-drawer" aria-label="Close">{% render 'icon-x' %}</button>
+    </div>
+    <nav class="mobile-nav">
+      <a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a>
+      <a href="{{ routes.collections_url }}/white-friday" style="font-weight:600;color:var(--color-accent);">{{ 'general.nav.black_friday' | t }}</a>
+      <div class="mobile-nav__group">
+        <div style="margin-bottom:.5rem;">{{ 'general.nav.shop_by_material' | t }}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;">
+          {% for collection in collections %}
+            {% if collection.metafields.custom.is_material %}
+              <a href="{{ collection.url }}" style="border:none;padding:0;color:var(--color-muted);">{{ collection.title }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <a href="{{ pages.brands.url | default: '/pages/brands' }}">{{ 'general.nav.brands' | t }}</a>
+      <a href="{{ pages.faq.url | default: '/pages/faq' }}">{{ 'general.nav.faq' | t }}</a>
+      <a href="{{ pages.contact.url | default: '/pages/contact' }}">{{ 'general.nav.contact' | t }}</a>
+    </nav>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "checkbox", "id": "show_announcement", "label": "Show White Friday announcement bar", "default": true },
+    { "type": "header", "content": "Mega menu promo" },
+    { "type": "image_picker", "id": "promo_image", "label": "Promo image" },
+    { "type": "url", "id": "promo_link", "label": "Promo link" }
+  ]
+}
+{% endschema %}

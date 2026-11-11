@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-brands",
+      "blocks": {
+        "brand_1": {
+          "type": "brand",
+          "settings": {
+            "name": "Levidor",
+            "description": "Artistic Indian silk patterns with modern geometric and floral designs",
+            "collection_handle": "levidor",
+            "count": 8
+          }
+        },
+        "brand_2": {
+          "type": "brand",
+          "settings": {
+            "name": "KARACA",
+            "description": "Premium Turkish chiffon, cotton, voile, and satin hijabs",
+            "collection_handle": "karaca",
+            "count": 18
+          }
+        },
+        "brand_3": {
+          "type": "brand",
+          "settings": {
+            "name": "Keten",
+            "description": "Linen-blend hijabs with contemporary artistic weaves",
+            "collection_handle": "keten",
+            "count": 18
+          }
+        },
+        "brand_4": {
+          "type": "brand",
+          "settings": {
+            "name": "Aker",
+            "description": "Luxury viscose and satin jacquard fabrics",
+            "collection_handle": "aker",
+            "count": 3
+          }
+        },
+        "brand_5": {
+          "type": "brand",
+          "settings": {
+            "name": "Valentino Orlandi",
+            "description": "High-end lyocell jacquard hijabs",
+            "collection_handle": "valentino-orlandi",
+            "count": 8
+          }
+        },
+        "brand_6": {
+          "type": "brand",
+          "settings": {
+            "name": "Pierre Cardin",
+            "description": "Premium cotton hijabs with classic elegance",
+            "collection_handle": "pierre-cardin",
+            "count": 1
+          }
+        }
+      },
+      "block_order": [
+        "brand_1",
+        "brand_2",
+        "brand_3",
+        "brand_4",
+        "brand_5",
+        "brand_6"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

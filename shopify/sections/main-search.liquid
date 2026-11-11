@@ -1,0 +1,15 @@
+<section class="container-r section">
+  <h1 style="font-size:2.5rem;">{{ 'general.search' | t }}</h1>
+  {% form 'search' %}
+    <div style="margin-top:1.5rem;display:flex;gap:.5rem;max-width:32rem;">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search_placeholder' | t }}" style="flex:1;border:1px solid var(--color-border);border-radius:4px;padding:.6rem .75rem;">
+      <button type="submit" class="btn btn-primary">{{ 'general.search' | t }}</button>
+    </div>
+  {% endform %}
+  <div class="product-grid">
+    {% for item in search.results %}
+      {% if item.object_type == 'product' %}{% render 'product-card', product: item %}{% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% schema %}{ "name": "Search", "settings": [] }{% endschema %}

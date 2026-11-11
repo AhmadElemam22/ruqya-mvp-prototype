@@ -1,0 +1,16 @@
+<section class="container-r section">
+  <h1 style="font-size:2.5rem;">{{ 'general.nav.shop_by_material' | t }}</h1>
+  <div class="grid-2" style="margin-top:2rem;">
+    {% assign has_materials = false %}
+    {% for c in collections %}{% if c.metafields.custom.is_material %}{% assign has_materials = true %}{% break %}{% endif %}{% endfor %}
+    {% for collection in collections %}
+      {% if has_materials %}{% unless collection.metafields.custom.is_material %}{% continue %}{% endunless %}{% endif %}
+      {% assign tile_image = collection.image | default: collection.featured_image %}
+      <a href="{{ collection.url }}" class="material-tile">
+        {% if tile_image %}<img src="{{ tile_image | image_url: width: 600 }}" alt="{{ collection.title }}" loading="lazy">{% endif %}
+        <div class="material-tile__label"><span>{{ collection.title }}</span></div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}{ "name": "List collections", "settings": [] }{% endschema %}

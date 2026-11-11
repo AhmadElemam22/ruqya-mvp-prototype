@@ -1,0 +1,82 @@
+<section class="collection-hero">
+  <div class="container-r">
+    <nav class="breadcrumbs">
+      <a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a><span style="margin-inline:.5rem;">/</span>
+      <span style="color:var(--color-foreground);">{{ collection.title }}</span>
+    </nav>
+    <h1 style="font-size:3rem;margin-top:1rem;">{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <p class="text-muted" style="margin-top:.75rem;max-width:42rem;">{{ collection.description }}</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="container-r section" style="padding-top:2.5rem;">
+  <form id="collection-filter-form" method="get">
+    <div class="collection-toolbar">
+      <div class="text-sm text-muted">{{ collection.products_count }} {{ 'general.products' | t }}</div>
+      <div style="display:flex;align-items:center;gap:.75rem;">
+        <button type="button" class="text-sm" data-open-drawer="filter-drawer" style="display:flex;align-items:center;gap:.4rem;">
+          {{ 'general.filter' | t }}
+        </button>
+        <select name="sort_by" onchange="this.form.submit()" style="border:1px solid var(--color-border);border-radius:4px;padding:.4rem .6rem;background:var(--color-background);font-size:.875rem;">
+          <option value="manual" {% if collection.sort_by == 'manual' or collection.sort_by == blank %}selected{% endif %}>{{ 'general.sort.featured' | t }}</option>
+          <option value="price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>{{ 'general.sort.price_asc' | t }}</option>
+          <option value="price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>{{ 'general.sort.price_desc' | t }}</option>
+          <option value="created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>{{ 'general.sort.newest' | t }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="collection-layout">
+      <aside class="filter-panel">
+        {% render 'collection-filters', results: collection %}
+      </aside>
+
+      <div>
+        {% paginate collection.products by 24 %}
+          {% if collection.products.size == 0 %}
+            <div style="text-align:center;padding-block:6rem;">
+              <p style="font-size:1.5rem;font-family:var(--font-serif);">{{ 'general.no_products_match' | t }}</p>
+              <a href="{{ collection.url }}" class="btn btn-outline" style="margin-top:1rem;">{{ 'general.clear_filters' | t }}</a>
+            </div>
+          {% else %}
+            <div class="product-grid">
+              {% for product in collection.products %}
+                {% render 'product-card', product: product %}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% if paginate.pages > 1 %}
+            <div style="margin-top:3rem;display:flex;justify-content:center;gap:.5rem;">
+              {% if paginate.previous %}<a href="{{ paginate.previous.url }}" class="btn btn-outline">←</a>{% endif %}
+              {% for part in paginate.parts %}
+                {% if part.is_link %}<a href="{{ part.url }}" class="btn btn-outline">{{ part.title }}</a>
+                {% else %}<span class="btn" style="background:var(--color-surface);">{{ part.title }}</span>{% endif %}
+              {% endfor %}
+              {% if paginate.next %}<a href="{{ paginate.next.url }}" class="btn btn-outline">→</a>{% endif %}
+            </div>
+          {% endif %}
+        {% endpaginate %}
+      </div>
+    </div>
+  </form>
+</section>
+
+<div class="drawer-overlay" id="filter-drawer">
+  <div class="drawer-overlay__bg"></div>
+  <div class="drawer-panel drawer-panel--end">
+    <div class="drawer-panel__head">
+      <h3 style="font-size:1.25rem;">{{ 'general.filter' | t }}</h3>
+      <button data-close-drawer="filter-drawer" aria-label="Close">{% render 'icon-x' %}</button>
+    </div>
+    <div style="margin-top:1.5rem;">
+      {% render 'collection-filters', results: collection %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}
