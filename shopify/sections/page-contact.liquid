@@ -1,0 +1,74 @@
+<section class="container-r" style="padding-top:2rem;">
+  <nav class="breadcrumbs"><a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a><span style="margin-inline:.5rem;">/</span><span style="color:var(--color-foreground);">{{ 'general.nav.contact' | t }}</span></nav>
+</section>
+<section class="container-r" style="padding-block:3rem;">
+  <h1 style="font-size:3rem;">{{ 'general.nav.contact' | t }}</h1>
+  <p class="text-muted" style="margin-top:1rem;max-width:42rem;">{{ 'general.contact.intro' | t }}</p>
+</section>
+<section class="container-r section" style="padding-top:0;padding-bottom:6rem;">
+  <div style="display:grid;gap:3rem;" class="contact-grid">
+    <style>@media(min-width:768px){.contact-grid{grid-template-columns:1fr 1fr;gap:4rem;}}</style>
+    <div>
+      <h2 style="font-size:1.5rem;">{{ 'general.contact.get_in_touch' | t }}</h2>
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}
+          <div style="margin-top:1.5rem;border:1px solid var(--color-primary);background:var(--color-surface);border-radius:8px;padding:1.5rem;font-size:.875rem;">{{ 'general.contact.thank_you' | t }}</div>
+        {% else %}
+          <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:1rem;">
+            <label class="field"><span>{{ 'general.contact.full_name' | t }}</span><input type="text" name="contact[name]" required></label>
+            <label class="field"><span>{{ 'general.contact.email' | t }}</span><input type="email" name="contact[email]" required></label>
+            <label class="field"><span>{{ 'general.contact.phone' | t }}</span><input type="tel" name="contact[phone]"></label>
+            <label class="field">
+              <span>{{ 'general.contact.subject' | t }}</span>
+              <select name="contact[subject]">
+                <option>{{ 'general.contact.subject_general' | t }}</option>
+                <option>{{ 'general.contact.subject_order' | t }}</option>
+                <option>{{ 'general.contact.subject_return' | t }}</option>
+                <option>{{ 'general.contact.subject_wholesale' | t }}</option>
+              </select>
+            </label>
+            <label class="field"><span>{{ 'general.contact.message' | t }}</span><textarea name="contact[body]" rows="5" required></textarea></label>
+            <button type="submit" class="btn btn-primary">{{ 'general.contact.send' | t }}</button>
+          </div>
+        {% endif %}
+      {% endform %}
+    </div>
+    <div>
+      <h2 style="font-size:1.5rem;">{{ 'general.contact.love_to_hear' | t }}</h2>
+      {%- assign wa1_display = settings.whatsapp_number -%}
+      {%- if wa1_display.size > 2 -%}
+        {%- assign wa1_prefix = wa1_display | slice: 0, 2 -%}
+        {%- if wa1_prefix == '20' -%}
+          {%- assign wa1_display = wa1_display | slice: 2, 20 | prepend: '0' -%}
+        {%- endif -%}
+      {%- endif -%}
+      <a href="https://wa.me/{{ settings.whatsapp_number }}" class="btn" style="background:var(--color-whatsapp);color:#fff;width:100%;margin-top:1.5rem;">
+        {% render 'icon-whatsapp' %} {{ 'general.contact.whatsapp_primary' | t }} — {{ wa1_display }}
+      </a>
+      {% if settings.whatsapp_number_2 != blank %}
+        {%- assign wa2_display = settings.whatsapp_number_2 -%}
+        {%- if wa2_display.size > 2 -%}
+          {%- assign wa2_prefix = wa2_display | slice: 0, 2 -%}
+          {%- if wa2_prefix == '20' -%}
+            {%- assign wa2_display = wa2_display | slice: 2, 20 | prepend: '0' -%}
+          {%- endif -%}
+        {%- endif -%}
+        <a href="https://wa.me/{{ settings.whatsapp_number_2 }}" class="btn btn-outline" style="width:100%;margin-top:.5rem;">
+          {% render 'icon-whatsapp' %} {{ 'general.contact.whatsapp_secondary' | t }} — {{ wa2_display }}
+        </a>
+      {% endif %}
+      <div style="margin-top:2rem;display:flex;flex-direction:column;gap:1rem;font-size:.875rem;">
+        <div style="display:flex;align-items:center;gap:.75rem;">{% render 'icon-mail' %} {{ settings.contact_email }}</div>
+        <div style="display:flex;gap:.75rem;">
+          {% if settings.instagram_url != blank %}<a href="{{ settings.instagram_url }}" aria-label="Instagram" style="display:grid;place-items:center;height:2.25rem;width:2.25rem;border-radius:999px;border:1px solid var(--color-border);">{% render 'icon-instagram' %}</a>{% endif %}
+          {% if settings.facebook_url != blank %}<a href="{{ settings.facebook_url }}" aria-label="Facebook" style="display:grid;place-items:center;height:2.25rem;width:2.25rem;border-radius:999px;border:1px solid var(--color-border);">{% render 'icon-facebook' %}</a>{% endif %}
+        </div>
+      </div>
+      <p class="text-sm text-muted" style="margin-top:1rem;">{{ 'general.footer.bilingual' | t }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Contact page", "settings": [] }
+{% endschema %}

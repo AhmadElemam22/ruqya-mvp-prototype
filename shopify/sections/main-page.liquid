@@ -1,0 +1,10 @@
+<section class="container-r" style="padding-top:2rem;">
+  <nav class="breadcrumbs"><a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a><span style="margin-inline:.5rem;">/</span><span style="color:var(--color-foreground);">{{ page.title }}</span></nav>
+</section>
+<section class="container-r section">
+  <h1 style="font-size:2.5rem;">{{ page.title }}</h1>
+  <div style="margin-top:1.5rem;max-width:48rem;" class="text-muted">{{ page.content }}</div>
+</section>
+{% schema %}
+{ "name": "Page", "settings": [] }
+{% endschema %}

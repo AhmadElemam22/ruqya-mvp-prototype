@@ -1,0 +1,36 @@
+{% comment %} Uses Shopify's native storefront filtering (Search & Discovery app). Enable filters for vendor, price, and the Color option in Shopify admin → Search & Discovery → Filters. {% endcomment %}
+{% for filter in results.filters %}
+  <div class="filter-group">
+    <h4>{{ filter.label }}</h4>
+    <div style="margin-top:.75rem;">
+      {% case filter.type %}
+        {% when 'list' %}
+          {% for value in filter.values %}
+            <label style="display:flex;align-items:center;justify-content:space-between;font-size:.875rem;margin-top:.5rem;">
+              <span style="display:flex;align-items:center;gap:.5rem;">
+                <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} onchange="this.form.submit()">
+                {{ value.label }}
+              </span>
+              <span class="text-xs text-muted">({{ value.count }})</span>
+            </label>
+          {% endfor %}
+        {% when 'price_range' %}
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;">
+            <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value }}" placeholder="{{ filter.min_value.value | default: 0 }}" style="flex:1 1 4.5rem;min-width:0;width:100%;border:1px solid var(--color-border);border-radius:4px;padding:.35rem;">
+            <span>–</span>
+            <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value }}" placeholder="{{ filter.range_max }}" style="flex:1 1 4.5rem;min-width:0;width:100%;border:1px solid var(--color-border);border-radius:4px;padding:.35rem;">
+            <button type="submit" class="btn btn-outline" style="padding:.35rem .75rem;">{{ 'general.apply' | t }}</button>
+          </div>
+        {% when 'boolean' %}
+          <label style="display:flex;align-items:center;gap:.5rem;font-size:.875rem;">
+            <input type="checkbox" name="{{ filter.values[0].param_name }}" value="{{ filter.values[0].value }}" {% if filter.values[0].active %}checked{% endif %} onchange="this.form.submit()">
+            {{ filter.values[0].label }}
+          </label>
+      {% endcase %}
+    </div>
+  </div>
+{% endfor %}
+
+{% if results.current_vendor or results.current_type %}
+  <a href="{{ results.url }}" class="text-xs" style="text-decoration:underline;display:inline-block;margin-top:1rem;">{{ 'general.clear_filters' | t }}</a>
+{% endif %}

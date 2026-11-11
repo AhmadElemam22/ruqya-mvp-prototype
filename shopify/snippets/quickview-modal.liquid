@@ -1,0 +1,23 @@
+<div class="quickview-overlay" id="quickview-overlay">
+  <div class="drawer-overlay__bg" data-close-drawer="quickview-overlay" style="position:absolute;inset:0;"></div>
+  <div class="quickview-modal" id="quickview-modal">
+    <img data-qv-image src="" alt="">
+    <div class="quickview-modal__body">
+      <button data-close-drawer="quickview-overlay" aria-label="Close" style="align-self:flex-end;">{% render 'icon-x' %}</button>
+      <div class="text-xs text-muted" style="text-transform:uppercase;letter-spacing:.05em;margin-top:1rem;" data-qv-vendor></div>
+      <h3 style="font-size:1.5rem;margin-top:.5rem;" data-qv-title></h3>
+      <div style="font-size:1.125rem;margin-top:.75rem;" data-qv-price></div>
+      <div style="margin-top:1.5rem;" data-swatch-group>
+        <div class="text-xs text-muted" style="text-transform:uppercase;letter-spacing:.05em;">
+          {{ 'general.color' | t }}: <span style="color:var(--color-foreground);" data-selected-color></span>
+        </div>
+        <div class="color-swatches" data-qv-swatches></div>
+      </div>
+      <form data-ajax-cart-form data-pdp-form action="/cart/add" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="">
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:1.5rem;">{{ 'general.add_to_cart' | t }}</button>
+      </form>
+      <a href="#" data-qv-link class="text-sm" style="text-align:center;text-decoration:underline;margin-top:.75rem;display:block;">{{ 'general.view_full_details' | t }}</a>
+    </div>
+  </div>
+</div>

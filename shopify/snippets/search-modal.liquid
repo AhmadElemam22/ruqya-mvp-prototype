@@ -1,0 +1,20 @@
+<div class="search-overlay" id="search-overlay">
+  <div class="container-r">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <span class="site-header__logo">{{ shop.name | upcase }}</span>
+      <button data-close-drawer="search-overlay" aria-label="Close">{% render 'icon-x' %}</button>
+    </div>
+    <div class="search-input-row">
+      {% render 'icon-search' %}
+      <input type="search" id="search-input" placeholder="{{ 'general.search_placeholder' | t }}" autocomplete="off">
+    </div>
+    <div id="search-suggested" style="margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem;">
+      <span class="text-xs text-muted" style="text-transform:uppercase;letter-spacing:.05em;">{{ 'general.suggested' | t }}:</span>
+      {% assign suggested_tags = "Silk,KARACA,Chiffon,Levidor" | split: "," %}
+      {% for tag in suggested_tags %}
+        <button type="button" onclick="document.getElementById('search-input').value='{{ tag }}';document.getElementById('search-input').dispatchEvent(new Event('input'));" class="filter-chip">{{ tag }}</button>
+      {% endfor %}
+    </div>
+    <div id="search-results" class="product-grid" style="margin-top:1.5rem;"></div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+{%- comment -%} Tiers mirror the automatic discounts in Shopify admin: 1+ items free shipping, 2 items 10%, 3+ items 20%. {%- endcomment -%}
+{%- assign qty = cart.item_count -%}
+{%- assign level = qty | at_most: 3 -%}
+{%- assign pct = level | times: 100 | divided_by: 3 -%}
+{%- capture msg_key -%}general.rewards.msg_{{ level }}{%- endcapture -%}
+<div class="rewards">
+  <p class="rewards__msg">{{ msg_key | t }}</p>
+  <div class="rewards__track">
+    <div class="rewards__bar"><span style="width:{{ pct }}%;"></span></div>
+    <ol class="rewards__steps">
+      {%- for step in (1..3) -%}
+        {%- capture label_key -%}general.rewards.step_{{ step }}{%- endcapture -%}
+        <li class="rewards__step{% if qty >= step %} is-done{% endif %}{% if step == 1 %} rewards__step--shipping{% endif %}">
+          <span class="rewards__dot">{% if step == 1 %}{% render 'icon-truck' %}{% elsif qty >= step %}✓{% else %}{{ step }}{% endif %}</span>
+          <span class="rewards__label">{{ label_key | t }}</span>
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</div>

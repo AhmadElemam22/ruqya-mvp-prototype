@@ -1,0 +1,135 @@
+<div class="toast" id="pdp-toast">{% render 'icon-check' %} {{ 'general.added_to_cart' | t }}</div>
+
+<section class="container-r" style="padding-top:2rem;">
+  <nav class="breadcrumbs">
+    <a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a><span style="margin-inline:.5rem;">/</span>
+    {% if product.metafields.custom.material_label %}{{ product.metafields.custom.material_label }}<span style="margin-inline:.5rem;">/</span>{% endif %}
+    <span style="color:var(--color-foreground);">{{ product.title }}</span>
+  </nav>
+</section>
+
+<section class="container-r pdp-grid">
+  <div data-gallery>
+    <div class="pdp-gallery-main">
+      <img data-gallery-main src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title | escape }}">
+    </div>
+    {%- comment -%}
+      Each variant's image starts a color group: it and the images after it (up to the next
+      variant image) belong to that color. Images before the first variant image show for all colors.
+    {%- endcomment -%}
+    {%- capture variant_image_ids -%}{% for variant in product.variants %}{% if variant.featured_image %}{{ variant.featured_image.id }},{% endif %}{% endfor %}{%- endcapture -%}
+    {%- assign variant_image_ids = variant_image_ids | split: ',' -%}
+    {%- assign current_group = 'all' -%}
+    <div class="pdp-thumbs">
+      {% for image in product.images %}
+        {%- assign image_id = image.id | append: '' -%}
+        {%- if variant_image_ids contains image_id -%}{%- assign current_group = image_id -%}{%- endif -%}
+        <button type="button" data-gallery-thumb="{{ image | image_url: width: 1000 }}" data-image-group="{{ current_group }}" class="{% if forloop.first %}is-active{% endif %}">
+          <img src="{{ image | image_url: width: 200 }}" alt="">
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="pdp-info">
+    {% capture vh %}{% render 'vendor-handle', vendor: product.vendor %}{% endcapture %}
+    <a href="{{ routes.collections_url }}/{{ vh | strip }}" class="text-xs text-muted" style="text-transform:uppercase;letter-spacing:.05em;">{{ product.vendor }}</a>
+    <h1 style="font-size:1.875rem;margin-top:.5rem;">{{ product.title }}</h1>
+    <div class="pdp-price" data-pdp-price>{{ product.selected_or_first_available_variant.price | money }}</div>
+    <p class="text-sm text-muted" style="margin-top:1rem;">
+      {{ 'general.pdp.premium_desc' | t: material: product.metafields.custom.material_label | downcase }} {{ 'general.pdp.dimensions' | t }}: {{ product.metafields.custom.dimensions }}.
+    </p>
+    {% if product.metafields.custom.material_label %}
+      <span style="display:inline-block;margin-top:.75rem;border-radius:999px;background:var(--color-surface);padding:.25rem .75rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;">{{ product.metafields.custom.material_label }}</span>
+    {% endif %}
+
+    <form data-ajax-cart-form data-pdp-form action="/cart/add" method="post" enctype="multipart/form-data">
+      <div data-swatch-group style="margin-top:1.5rem;">
+        <div class="text-xs text-muted" style="text-transform:uppercase;letter-spacing:.05em;">
+          {{ 'general.color' | t }}: <span style="color:var(--color-foreground);" data-selected-color>{{ product.selected_or_first_available_variant.title }}</span>
+        </div>
+        <div class="color-swatches">
+          {% for variant in product.variants %}
+            <button type="button" data-variant-swatch data-variant-id="{{ variant.id }}" data-color-name="{{ variant.title | escape }}"{% if variant.featured_image %} data-variant-image="{{ variant.featured_image | image_url: width: 1000 }}" data-variant-group="{{ variant.featured_image.id }}"{% endif %} data-variant-price="{{ variant.price | money | escape }}"
+              class="color-swatch{% if forloop.first %} is-active{% endif %}"
+              style="background:{% render 'color-hex', name: variant.title, product: product %};" title="{{ variant.title }}"></button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem;" data-qty-wrap>
+        <div class="qty-stepper">
+          <button type="button" data-qty-step="dec">−</button>
+          <input type="number" name="quantity" value="1" min="1" data-qty-value>
+          <button type="button" data-qty-step="inc">+</button>
+        </div>
+      </div>
+
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <input type="hidden" name="return_to" value="/checkout">
+      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:1rem;padding-block:.9rem;">{{ 'general.add_to_cart' | t }}</button>
+      <button type="submit" data-buy-now formaction="/cart/add" class="btn btn-outline" style="width:100%;margin-top:.5rem;">{{ 'general.buy_item' | t }}</button>
+    </form>
+    <div style="margin-top:1.5rem;border-radius:var(--radius-md);background:var(--color-surface);padding:1rem;">{% render 'cart-rewards' %}</div>
+
+    <div style="margin-top:1.5rem;border-top:1px solid var(--color-border);padding-top:1.5rem;display:grid;gap:.5rem;font-size:.75rem;color:var(--color-muted);grid-template-columns:1fr;">
+      <style>@media(min-width:640px){.pdp-trust{grid-template-columns:repeat(2,1fr);}}</style>
+      <div class="pdp-trust" style="display:grid;gap:.5rem;grid-template-columns:repeat(2,1fr);">
+        <div>✓ {{ 'general.trust.authentic' | t }}</div>
+        <div>✓ {{ 'general.trust.easy_returns' | t }}</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;border-top:1px solid var(--color-border);">
+      <div class="accordion-item is-open">
+        <button type="button" class="accordion-item__head">{{ 'general.pdp.description' | t }} <span class="accordion-item__chevron">{% render 'icon-chevron-down' %}</span></button>
+        <div class="accordion-item__body product-description">
+          <p>{{ product.description }}</p>
+          <p>{{ 'general.pdp.care' | t }}</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button type="button" class="accordion-item__head">{{ 'general.pdp.shipping_returns' | t }} <span class="accordion-item__chevron">{% render 'icon-chevron-down' %}</span></button>
+        <div class="accordion-item__body">
+          <ul style="margin:0;padding-inline-start:1.1rem;">
+            <li>{{ 'general.pdp.ship_1' | t }}</li>
+            <li>{{ 'general.pdp.ship_2' | t }}</li>
+            <li>{{ 'general.pdp.ship_4' | t }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button type="button" class="accordion-item__head">{{ 'general.pdp.brand' | t }} — {{ product.vendor }} <span class="accordion-item__chevron">{% render 'icon-chevron-down' %}</span></button>
+        <div class="accordion-item__body">
+          <p>{{ 'general.pdp.brand_desc' | t: vendor: product.vendor }}</p>
+          <a href="{{ routes.collections_url }}/{{ vh | strip }}" style="text-decoration:underline;color:var(--color-foreground);">{{ 'general.pdp.shop_all' | t: vendor: product.vendor }} →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container-r section" style="padding-top:2rem;">
+  <h3 style="font-size:1.875rem;">{{ 'general.pdp.you_may_also_like' | t }}</h3>
+  <div class="product-grid">
+    {% assign related_count = 0 %}
+    {% for p in collections.all.products %}
+      {% if p.id != product.id and related_count < 4 %}
+        {% render 'product-card', product: p %}
+        {% assign related_count = related_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+document.getElementById('pdp-toast') && document.querySelector('[data-pdp-form]')?.addEventListener('submit', function(){
+  var t = document.getElementById('pdp-toast');
+  t.classList.add('is-visible');
+  setTimeout(function(){ t.classList.remove('is-visible'); }, 2000);
+});
+</script>
+
+{% schema %}
+{ "name": "Product", "settings": [] }
+{% endschema %}
