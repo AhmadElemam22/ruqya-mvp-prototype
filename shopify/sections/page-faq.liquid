@@ -1,0 +1,90 @@
+<section class="container-r" style="padding-top:2rem;max-width:48rem;">
+  <nav class="breadcrumbs" style="text-align:center;"><a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a><span style="margin-inline:.5rem;">/</span><span style="color:var(--color-foreground);">{{ 'general.nav.faq' | t }}</span></nav>
+</section>
+<section class="container-r" style="padding-block:3rem;max-width:48rem;text-align:center;">
+  <h1 style="font-size:3rem;">{{ section.settings.heading | default: 'faq.page.heading' | t }}</h1>
+  <p class="text-muted" style="margin-top:1rem;">{{ section.settings.subheading | default: 'faq.page.subheading' | t }}</p>
+  <div style="margin:2rem auto 0;max-width:28rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--color-border);padding-bottom:.5rem;">
+    {% render 'icon-search' %}
+    <input type="text" id="faq-search" placeholder="{{ 'general.faq.search_placeholder' | t }}" style="flex:1;background:none;border:none;outline:none;font-size:.875rem;">
+  </div>
+</section>
+<section class="container-r" style="padding-bottom:4rem;">
+  <div style="max-width:48rem;margin-inline:auto;display:flex;flex-direction:column;gap:3rem;" id="faq-list">
+    {% assign current_cat = "" %}
+    {% for block in section.blocks %}
+      {% capture cat_key %}faq.{{ block.id }}.category{% endcapture %}
+      {% capture cat_text %}{{ block.settings.category | default: cat_key | t }}{% endcapture %}
+      {% capture q_key %}faq.{{ block.id }}.question{% endcapture %}
+      {% capture q_text %}{{ block.settings.question | default: q_key | t }}{% endcapture %}
+      {% capture a_key %}faq.{{ block.id }}.answer{% endcapture %}
+      {% capture a_text %}{{ block.settings.answer | default: a_key | t }}{% endcapture %}
+      {% if cat_text != current_cat %}
+        {% unless forloop.first %}</div></div>{% endunless %}
+        <div class="faq-cat" data-faq-cat>
+        <h2 style="font-size:1.5rem;">{{ cat_text }}</h2>
+        <div style="margin-top:1rem;border-block:1px solid var(--color-border);">
+        {% assign current_cat = cat_text %}
+      {% endif %}
+      <div class="accordion-item" data-faq-item data-faq-text="{{ q_text | append: ' ' | append: a_text | downcase | escape }}">
+        <button type="button" class="accordion-item__head"><span style="font-weight:500;">{{ q_text }}</span><span class="accordion-item__chevron">{% render 'icon-chevron-down' %}</span></button>
+        <div class="accordion-item__body">{{ a_text }}</div>
+      </div>
+      {% if forloop.last %}</div></div>{% endif %}
+    {% endfor %}
+  </div>
+
+  <div style="max-width:36rem;margin-inline:auto;margin-top:4rem;border-radius:12px;background:var(--color-surface);padding:2rem;text-align:center;">
+    <h3 style="font-size:1.5rem;">{{ 'general.faq.still_questions' | t }}</h3>
+    <a href="https://wa.me/{{ settings.whatsapp_number }}" class="btn" style="background:var(--color-whatsapp);color:#fff;margin-top:1rem;">
+      {% render 'icon-whatsapp' %} {{ 'general.faq.chat_with_us' | t }}
+    </a>
+  </div>
+</section>
+
+<script>
+document.getElementById('faq-search').addEventListener('input', function (e) {
+  var q = e.target.value.toLowerCase();
+  document.querySelectorAll('[data-faq-item]').forEach(function (item) {
+    var match = item.getAttribute('data-faq-text').indexOf(q) !== -1;
+    item.style.display = match ? '' : 'none';
+  });
+  document.querySelectorAll('[data-faq-cat]').forEach(function (cat) {
+    var visible = cat.querySelectorAll('[data-faq-item]:not([style*="display: none"])').length > 0;
+    cat.style.display = visible ? '' : 'none';
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "FAQ page",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading" }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        { "type": "text", "id": "category", "label": "Category" },
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ page",
+      "blocks": [
+        { "type": "faq", "settings": { "category": "Orders & Shipping", "question": "How long does delivery take in Egypt?", "answer": "2–5 business days nationwide. Cairo and Giza often receive same-week delivery." } },
+        { "type": "faq", "settings": { "category": "Orders & Shipping", "question": "Do you offer free shipping?", "answer": "Yes, free shipping on all orders over 2,000 EGP." } },
+        { "type": "faq", "settings": { "category": "Products & Materials", "question": "Are RUQYA designs printed or woven?", "answer": "All designs are woven directly into the fabric — never printed or replicated." } },
+        { "type": "faq", "settings": { "category": "Returns & Exchanges", "question": "What is your return policy?", "answer": "Returns accepted within 14 days if unworn with tags attached." } },
+        { "type": "faq", "settings": { "category": "Payments", "question": "What payment methods do you accept?", "answer": "Cash on delivery. Pay the courier in cash or via InstaPay when your order arrives." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

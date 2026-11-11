@@ -1,0 +1,11 @@
+{% comment %} Usage: {% render 'material-tile', col: collection, label: 'optional', image: optional_image %} {% endcomment %}
+{% assign tile_image = col.image | default: image | default: col.products.first.featured_image %}
+<a href="{{ col.url | default: '#' }}" class="material-tile">
+  {% if tile_image %}
+    <img src="{{ tile_image | image_url: width: 600 }}" alt="{{ label | default: col.title | escape }}" loading="lazy">
+  {% endif %}
+  <div class="material-tile__label">
+    <span>{{ label | default: col.title }}</span>
+    {% render 'icon-arrow-right' %}
+  </div>
+</a>

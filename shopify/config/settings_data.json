@@ -1,0 +1,21 @@
+{
+  "current": {
+    "color_background": "#FAF8F5",
+    "color_foreground": "#1A1A1A",
+    "color_surface": "#F3EFE8",
+    "color_primary": "#6B7F6E",
+    "color_primary_text": "#FAFAFA",
+    "color_accent": "#C4A882",
+    "color_border": "#E8E2D9",
+    "color_muted": "#6B6560",
+    "color_whatsapp": "#25D366",
+    "whatsapp_number": "201555941408",
+    "whatsapp_number_2": "201063804182",
+    "instapay_number": "01095009933",
+    "instapay_name": "Habiba Abdelnasser",
+    "instagram_url": "",
+    "facebook_url": "",
+    "contact_email": "hello@ruqya-eg.com",
+    "free_shipping_threshold": 2000
+  }
+}

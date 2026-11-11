@@ -1,0 +1,27 @@
+<div class="trust-bar">
+  <div class="container-r trust-bar__grid">
+    {% for block in section.blocks %}
+      {% capture tk %}home.trust.{{ block.id }}{% endcapture %}<div>✓ {{ block.settings.text | default: tk | t }}</div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust bar",
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [{ "type": "text", "id": "text", "label": "Text" }] }
+  ],
+  "presets": [
+    {
+      "name": "Trust bar",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Free shipping over 2,000 EGP" } },
+        { "type": "item", "settings": { "text": "Authentic Turkish brands" } },
+        { "type": "item", "settings": { "text": "Cash on delivery" } },
+        { "type": "item", "settings": { "text": "WhatsApp support" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+{% if cart.item_count == 0 %}
+  <section class="container-r section" style="text-align:center;">
+    <div style="max-width:28rem;margin-inline:auto;">
+      <div style="height:4rem;width:4rem;border-radius:999px;border:2px solid var(--color-border);margin-inline:auto;"></div>
+      <h1 style="font-size:2.25rem;margin-top:2rem;">{{ 'general.cart.empty' | t }}</h1>
+      <p class="text-muted" style="margin-top:.75rem;">{{ 'general.cart.empty_copy' | t }}</p>
+      <a href="{{ routes.root_url }}" class="btn btn-primary" style="margin-top:2rem;">{{ 'general.cart.discover_collection' | t }}</a>
+    </div>
+  </section>
+{% else %}
+  <section class="container-r" style="padding-top:2rem;">
+    <nav class="breadcrumbs"><a href="{{ routes.root_url }}">{{ 'general.nav.home' | t }}</a><span style="margin-inline:.5rem;">/</span><span style="color:var(--color-foreground);">{{ 'general.cart.title' | t }}</span></nav>
+  </section>
+  <section class="container-r" style="padding-block:3rem;">
+    <h1 style="font-size:3rem;">{{ 'general.cart.your_cart' | t }}</h1>
+    <div style="display:grid;gap:3rem;margin-top:2.5rem;" class="cart-page-grid">
+      <style>@media(min-width:1024px){.cart-page-grid{grid-template-columns:1fr 400px;}}</style>
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <div style="border-block:1px solid var(--color-border);">
+          {% for item in cart.items %}
+            <div class="cart-line">
+              <img src="{{ item.image | image_url: width: 300 }}" alt="">
+              <div style="min-width:0;">
+                <a href="{{ item.url }}" class="text-sm">{{ item.product.title }}</a>
+                <div class="text-xs text-muted" style="margin-top:.25rem;">{{ item.product.vendor }} · {{ item.variant.title }}</div>
+              </div>
+              <div class="qty-stepper" data-qty-wrap data-cart-line-key="{{ item.key }}">
+                <button type="button" data-qty-step="dec">−</button>
+                <span data-qty-value>{{ item.quantity }}</span>
+                <button type="button" data-qty-step="inc">+</button>
+              </div>
+              <div class="text-sm">{{ item.final_line_price | money }}</div>
+              <button type="button" data-cart-remove="{{ item.key }}" aria-label="Remove" class="text-muted">{% render 'icon-trash' %}</button>
+            </div>
+          {% endfor %}
+        </div>
+      </form>
+
+      <aside class="cart-summary">
+        <h3 style="font-size:1.25rem;">{{ 'general.cart.order_summary' | t }}</h3>
+        <div style="margin-top:1rem;">{% render 'cart-rewards' %}</div>
+        <div style="display:flex;justify-content:space-between;font-size:.875rem;margin-top:1rem;">
+          <span>{{ 'general.cart.subtotal' | t }}</span><span style="font-weight:500;">{{ cart.total_price | money }}</span>
+        </div>
+        <form action="{{ routes.cart_url }}" method="post" novalidate>
+          <button type="submit" name="checkout" class="btn btn-primary" style="width:100%;margin-top:1rem;">{{ 'general.cart.checkout' | t }}</button>
+        </form>
+        <a href="{{ routes.root_url }}" class="text-sm" style="display:block;text-align:center;margin-top:.75rem;text-decoration:underline;">{{ 'general.cart.continue_shopping' | t }}</a>
+      </aside>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{ "name": "Cart", "settings": [] }
+{% endschema %}

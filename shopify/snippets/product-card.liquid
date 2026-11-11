@@ -1,0 +1,44 @@
+{% comment %} Usage: {% render 'product-card', product: product %} {% endcomment %}
+<div class="product-card">
+  <div class="product-card__media">
+    <a href="{{ product.url }}">
+      <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title | escape }}" loading="lazy" class="img-main">
+      {% if product.images[1] %}
+        <img src="{{ product.images[1] | image_url: width: 800 }}" alt="" aria-hidden="true" loading="lazy" class="img-alt">
+      {% endif %}
+    </a>
+    <button
+      type="button"
+      class="product-card__quickview"
+      aria-label="Quick view"
+      data-quickview-trigger
+      data-qv-image="{{ product.featured_image | image_url: width: 800 }}"
+      data-qv-vendor="{{ product.vendor | escape }}"
+      data-qv-title="{{ product.title | escape }}"
+      data-qv-price="{{ product.price | money }}"
+      data-qv-url="{{ product.url }}"
+      data-qv-colors='[{% for v in product.variants %}{"id":{{ v.id }},"name":"{{ v.title | escape }}","hex":"{% render 'color-hex', name: v.title, product: product %}"}{% unless forloop.last %},{% endunless %}{% endfor %}]'
+    >
+      {% render 'icon-eye' %}
+    </button>
+    {% if product.variants.size > 1 %}
+      <div class="product-card__options-pill">{{ 'general.select_options' | t }}</div>
+    {% endif %}
+  </div>
+  <div class="product-card__body">
+    {% capture vh %}{% render 'vendor-handle', vendor: product.vendor %}{% endcapture %}
+    <a href="{{ routes.collections_url }}/{{ vh | strip }}" class="product-card__vendor" style="display:block;">{{ product.vendor }}</a>
+    <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+    <div class="product-card__price">{{ product.price | money }}</div>
+    <div class="swatch-row">
+      {% assign shown = 0 %}
+      {% for v in product.variants %}
+        {% if shown < 5 %}
+          <span class="swatch-dot" style="background:{% render 'color-hex', name: v.title, product: product %};" data-color-name="{{ v.title }}" title="{{ v.title }}"></span>
+          {% assign shown = shown | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+      {% if product.variants.size > 5 %}<span class="text-xs text-muted">+{{ product.variants.size | minus: 5 }}</span>{% endif %}
+    </div>
+  </div>
+</div>
