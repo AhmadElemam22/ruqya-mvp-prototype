@@ -145,7 +145,8 @@
   });
 
   function refreshCartDrawer(open) {
-    fetch("/?section_id=cart-drawer")
+    // Current path keeps the locale (/ar-eg); "/" always rendered the English drawer.
+    fetch(`${window.location.pathname}?section_id=cart-drawer`)
       .then((r) => r.text())
       .then((html) => {
         const doc = new DOMParser().parseFromString(html, "text/html");
