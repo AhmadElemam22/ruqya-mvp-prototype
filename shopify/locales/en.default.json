@@ -44,6 +44,9 @@
       "free_shipping_unlocked": "Free shipping unlocked ✓",
       "order_summary": "Order summary",
       "subtotal": "Subtotal",
+      "before_discount": "Before discount",
+      "you_save": "You save",
+      "total": "Total",
       "title": "Cart",
       "view_cart": "View cart",
       "your_cart": "Your cart"

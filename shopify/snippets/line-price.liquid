@@ -1,0 +1,9 @@
+{%- comment -%}
+  shortcut: spreads the cart-level discount by line value, exact for the store's flat % order discounts; switch to item.discount_allocations if per-product discounts are added.
+{%- endcomment -%}
+{%- if cart.items_subtotal_price > cart.total_price and cart.items_subtotal_price > 0 -%}
+  {%- assign discounted = item.final_line_price | times: cart.total_price | divided_by: cart.items_subtotal_price -%}
+  <div class="line-price"><s>{{ item.final_line_price | money }}</s><span>{{ discounted | money }}</span></div>
+{%- else -%}
+  <div class="text-sm">{{ item.final_line_price | money }}</div>
+{%- endif -%}
