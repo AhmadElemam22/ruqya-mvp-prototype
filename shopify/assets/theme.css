@@ -314,6 +314,17 @@ html[dir="rtl"] .mega-menu { transform: translateX(50%); }
 .rewards__step--shipping .rewards__dot { height: 2rem; width: 2rem; border: 2px solid var(--color-accent); color: var(--color-accent); }
 .rewards__step--shipping.is-done .rewards__dot { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
 
+.line-price { display: flex; flex-direction: column; align-items: flex-end; font-size: 0.875rem; line-height: 1.3; }
+.line-price s { font-size: 0.75rem; color: var(--color-muted); }
+.line-price span { font-weight: 600; color: #b3261e; }
+.cart-totals__row--total span:last-child { color: #b3261e; }
+
+.cart-totals { display: grid; gap: 0.35rem; font-size: 0.875rem; }
+.cart-totals__row { display: flex; justify-content: space-between; }
+.cart-totals__row s { color: var(--color-muted); }
+.cart-totals__row--save { color: var(--color-primary); font-weight: 600; }
+.cart-totals__row--total { font-size: 1rem; font-weight: 600; }
+
 .announcement { overflow: hidden; background: var(--color-primary); color: var(--color-primary-foreground); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.06em; }
 .announcement__track { display: flex; width: max-content; animation: announcement-scroll 30s linear infinite; }
 .announcement__group { display: flex; }

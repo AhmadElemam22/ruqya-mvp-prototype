@@ -1,0 +1,15 @@
+{%- comment -%} items_subtotal_price is before the automatic order discount; total_price is after it. {%- endcomment -%}
+{%- assign savings = cart.items_subtotal_price | minus: cart.total_price -%}
+<div class="cart-totals">
+  {%- if savings > 0 -%}
+    <div class="cart-totals__row">
+      <span>{{ 'general.cart.before_discount' | t }}</span><s>{{ cart.items_subtotal_price | money }}</s>
+    </div>
+    <div class="cart-totals__row cart-totals__row--save">
+      <span>{{ 'general.cart.you_save' | t }}</span><span>− {{ savings | money }}</span>
+    </div>
+  {%- endif -%}
+  <div class="cart-totals__row cart-totals__row--total">
+    <span>{{ 'general.cart.total' | t }}</span><span>{{ cart.total_price | money }}</span>
+  </div>
+</div>

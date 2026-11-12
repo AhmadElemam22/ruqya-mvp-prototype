@@ -29,7 +29,7 @@
                 <span data-qty-value>{{ item.quantity }}</span>
                 <button type="button" data-qty-step="inc">+</button>
               </div>
-              <div class="text-sm">{{ item.final_line_price | money }}</div>
+              {% render 'line-price', item: item %}
               <button type="button" data-cart-remove="{{ item.key }}" aria-label="Remove" class="text-muted">{% render 'icon-trash' %}</button>
             </div>
           {% endfor %}
@@ -39,9 +39,7 @@
       <aside class="cart-summary">
         <h3 style="font-size:1.25rem;">{{ 'general.cart.order_summary' | t }}</h3>
         <div style="margin-top:1rem;">{% render 'cart-rewards' %}</div>
-        <div style="display:flex;justify-content:space-between;font-size:.875rem;margin-top:1rem;">
-          <span>{{ 'general.cart.subtotal' | t }}</span><span style="font-weight:500;">{{ cart.total_price | money }}</span>
-        </div>
+        <div style="margin-top:1rem;">{% render 'cart-totals' %}</div>
         <form action="{{ routes.cart_url }}" method="post" novalidate>
           <button type="submit" name="checkout" class="btn btn-primary" style="width:100%;margin-top:1rem;">{{ 'general.cart.checkout' | t }}</button>
         </form>
