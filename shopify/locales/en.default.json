@@ -107,8 +107,8 @@
       "description": "Description",
       "dimensions": "Dimensions",
       "premium_desc": "Premium {{ material }} hijab featuring an artistic woven pattern.",
-      "ship_1": "Egypt delivery: 2–5 business days",
-      "ship_2": "Cairo & Giza: same-week delivery available",
+      "ship_1": "Cairo, Giza, Alexandria & Delta: 3–5 business days",
+      "ship_2": "Other governorates: 5–8 business days",
       "ship_3": "Free shipping on orders over 2,000 EGP",
       "ship_4": "Returns within 14 days (unworn, tags attached)",
       "shipping_returns": "Shipping & Returns",
@@ -127,6 +127,13 @@
       "free_shipping": "Free shipping over 2,000 EGP"
     },
     "announcement": "White Friday Offer · Free Shipping 🎉",
+    "tiers": {
+      "one": "1 piece",
+      "two": "2 pieces · each",
+      "three": "3+ pieces · each",
+      "free_shipping": "Free shipping",
+      "save": "Save {{ pct }}%"
+    },
     "rewards": {
       "msg_0": "Add your first piece to unlock free shipping 🎁",
       "msg_1": "Free shipping unlocked! Add 1 more piece to get 10% off",
@@ -207,7 +214,7 @@
     "faq_1": {
       "category": "Orders & Shipping",
       "question": "How long does delivery take in Egypt?",
-      "answer": "2–5 business days nationwide. Cairo and Giza often receive same-week delivery."
+      "answer": "3–5 business days for Cairo, Giza, Alexandria and the Delta, and 5–8 business days for the other governorates."
     },
     "faq_2": {
       "category": "Orders & Shipping",
