@@ -1,0 +1,17 @@
+{%- comment -%} Per-piece price at each rewards tier; percentages mirror the automatic discounts in Shopify admin. {%- endcomment -%}
+{%- assign p2 = price | times: 90 | divided_by: 100 -%}
+{%- assign p3 = price | times: 80 | divided_by: 100 -%}
+<div class="price-tiers">
+  <div class="price-tiers__row">
+    <span>{{ 'general.tiers.one' | t }}</span>
+    <span class="price-tiers__amounts"><b data-tier="base">{{ price | money }}</b><em class="tier-badge">{{ 'general.tiers.free_shipping' | t }}</em></span>
+  </div>
+  <div class="price-tiers__row">
+    <span>{{ 'general.tiers.two' | t }}</span>
+    <span class="price-tiers__amounts"><s data-tier="base">{{ price | money }}</s><b data-tier="2">{{ p2 | money }}</b><em class="tier-badge">{{ 'general.tiers.save' | t: pct: 10 }}</em></span>
+  </div>
+  <div class="price-tiers__row">
+    <span>{{ 'general.tiers.three' | t }}</span>
+    <span class="price-tiers__amounts"><s data-tier="base">{{ price | money }}</s><b data-tier="3">{{ p3 | money }}</b><em class="tier-badge">{{ 'general.tiers.save' | t: pct: 20 }}</em></span>
+  </div>
+</div>

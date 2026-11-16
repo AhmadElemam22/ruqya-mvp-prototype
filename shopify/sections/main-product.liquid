@@ -36,6 +36,7 @@
     <a href="{{ routes.collections_url }}/{{ vh | strip }}" class="text-xs text-muted" style="text-transform:uppercase;letter-spacing:.05em;">{{ product.vendor }}</a>
     <h1 style="font-size:1.875rem;margin-top:.5rem;">{{ product.title }}</h1>
     <div class="pdp-price" data-pdp-price>{{ product.selected_or_first_available_variant.price | money }}</div>
+    {% render 'price-tiers', price: product.selected_or_first_available_variant.price %}
     <p class="text-sm text-muted" style="margin-top:1rem;">
       {{ 'general.pdp.premium_desc' | t: material: product.metafields.custom.material_label | downcase }} {{ 'general.pdp.dimensions' | t }}: {{ product.metafields.custom.dimensions }}.
     </p>
@@ -50,7 +51,7 @@
         </div>
         <div class="color-swatches">
           {% for variant in product.variants %}
-            <button type="button" data-variant-swatch data-variant-id="{{ variant.id }}" data-color-name="{{ variant.title | escape }}"{% if variant.featured_image %} data-variant-image="{{ variant.featured_image | image_url: width: 1000 }}" data-variant-group="{{ variant.featured_image.id }}"{% endif %} data-variant-price="{{ variant.price | money | escape }}"
+            <button type="button" data-variant-swatch data-variant-id="{{ variant.id }}" data-color-name="{{ variant.title | escape }}"{% if variant.featured_image %} data-variant-image="{{ variant.featured_image | image_url: width: 1000 }}" data-variant-group="{{ variant.featured_image.id }}"{% endif %} data-variant-price="{{ variant.price | money | escape }}" data-variant-price-2="{{ variant.price | times: 90 | divided_by: 100 | money | escape }}" data-variant-price-3="{{ variant.price | times: 80 | divided_by: 100 | money | escape }}"
               class="color-swatch{% if forloop.first %} is-active{% endif %}"
               style="background:{% render 'color-hex', name: variant.title, product: product %};" title="{{ variant.title }}"></button>
           {% endfor %}

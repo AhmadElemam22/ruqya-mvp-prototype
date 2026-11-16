@@ -108,6 +108,13 @@
     const variantPrice = sw.getAttribute("data-variant-price");
     const priceEl = qs("[data-pdp-price]");
     if (variantPrice && priceEl) priceEl.textContent = variantPrice;
+    if (variantPrice) {
+      qsa('[data-tier="base"]').forEach((el) => { el.textContent = variantPrice; });
+      ["2", "3"].forEach((t) => {
+        const v = sw.getAttribute(`data-variant-price-${t}`);
+        if (v) qsa(`[data-tier="${t}"]`).forEach((el) => { el.textContent = v; });
+      });
+    }
     const variantId = sw.getAttribute("data-variant-id");
     const form = sw.closest("form");
     if (form && variantId) {
